@@ -1,0 +1,27 @@
+{
+  "name": "voxwit-humor-engine",
+  "version": "1.0.0",
+  "description": "Fastify microservice that generates LinkedIn humor hooks",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "compromise": "^14.15.0",
+    "dotenv": "^17.3.1",
+    "fastify": "^5.8.2",
+    "openai": "^6.29.0",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

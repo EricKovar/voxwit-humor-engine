@@ -1,0 +1,43 @@
+{
+ "version": "1.1",
+ "structures": [
+   {
+     "name": "Truth Bomb",
+     "prompt": "Everyone says X. But the real problem is Y."
+   },
+   {
+     "name": "Corporate Translation",
+     "prompt": "Corporate translation: X = Y"
+   },
+   {
+     "name": "Unexpected Analogy",
+     "prompt": "X is basically like Y."
+   },
+   {
+     "name": "Reverse Forecast",
+     "prompt": "If you want X, stop doing Y."
+   },
+   {
+     "name": "Customer Reality Check",
+     "prompt": "Customers asked for X. What they really need is Y."
+   },
+   {
+     "name": "LinkedIn Confessional",
+     "prompt": "I used to think X. Turns out Y."
+   },
+   {
+     "name": "Data Whisper",
+     "prompt": "Metric says X. Translation: Y."
+   }
+ ],
+ "rules": [
+   "1-2 sentences",
+   "professional tone",
+   "clever not goofy",
+   "avoid sarcasm",
+   "no politics",
+   "show the contrast between myth vs. reality",
+   "name a concrete actor (team, metric, customer)",
+   "hint at the stakes or payoff"
+ ]
+}
