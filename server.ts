@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import fs from 'fs';
 import { promises as fsPromises } from 'fs';
 import path from 'path';
@@ -28,6 +29,17 @@ const responseSchema = routeSpec?.responses?.['200']?.content?.['application/jso
 const WAITLIST_FILE = path.resolve(process.cwd(), 'data/waitlist.csv');
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/i;
+
+fastify.register(cors, {
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://voxwit.com',
+    'https://www.voxwit.com',
+    'https://voxwit-website.vercel.app',
+  ],
+  methods: ['GET', 'POST'],
+});
 
 registerGenerateHooksRoute(fastify, {
   generator,
