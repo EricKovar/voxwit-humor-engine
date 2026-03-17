@@ -87,8 +87,8 @@ function App() {
           <p className="eyebrow">VoxWit · Humor Engine</p>
           <h1>Demo clever hooks live in the browser</h1>
           <p className="subtitle">
-            Paste a LinkedIn draft, tweak tone, and show investors the real-time hooks coming
-            straight from the Fastify service on <code>localhost:4000</code>.
+            Paste a LinkedIn draft, tweak tone, and show investors the real-time hooks powered by
+            the VoxWit API running at <a href="https://voxwit.com" target="_blank" rel="noreferrer">voxwit.com</a>.
           </p>
         </div>
         <div className="status-card">

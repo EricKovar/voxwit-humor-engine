@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
 import fs from 'fs';
+import { promises as fsPromises } from 'fs';
 import path from 'path';
 import YAML from 'yaml';
 import { registerGenerateHooksRoute } from './src/api/generateHooks';
@@ -24,6 +25,9 @@ const spec = loadOpenApiSpec();
 const routeSpec = spec.paths?.['/generate-hooks']?.post ?? {};
 const bodySchema = routeSpec?.requestBody?.content?.['application/json']?.schema;
 const responseSchema = routeSpec?.responses?.['200']?.content?.['application/json']?.schema;
+const WAITLIST_FILE = path.resolve(process.cwd(), 'data/waitlist.csv');
+const EMAIL_REGEX =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/i;
 
 registerGenerateHooksRoute(fastify, {
   generator,
@@ -33,6 +37,27 @@ registerGenerateHooksRoute(fastify, {
       200: responseSchema,
     },
   },
+});
+
+fastify.post('/waitlist', async (request, reply) => {
+  const { email, source } = request.body as { email?: string; source?: string };
+
+  if (!email || typeof email !== 'string' || !EMAIL_REGEX.test(email)) {
+    return reply.status(400).send({ error: 'A valid email is required.' });
+  }
+
+  const normalizedEmail = email.toLowerCase();
+  const line = `${new Date().toISOString()},${normalizedEmail},${source ?? 'voxwit.com'}\n`;
+
+  try {
+    await fsPromises.mkdir(path.dirname(WAITLIST_FILE), { recursive: true });
+    await fsPromises.appendFile(WAITLIST_FILE, line, 'utf8');
+    logger.info(`Waitlist joined: ${normalizedEmail}`);
+    return { success: true };
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Unable to save your email right now. Please try again.' });
+  }
 });
 
 fastify.get('/', async (_, reply) => {
@@ -52,10 +77,10 @@ fastify.get('/', async (_, reply) => {
       <body>
         <div class="card">
           <h1>🧠 VoxWit Humor Engine API</h1>
-          <p>The Fastify backend is online on <code>http://localhost:4000</code>.</p>
+          <p>The Fastify backend is live on <code>https://voxwit-humor-engine.onrender.com</code>.</p>
           <ol>
             <li>Call <code>POST /generate-hooks</code> with your LinkedIn draft to get JSON hooks.</li>
-            <li>Or open the demo UI at <a href="http://localhost:5173" target="_blank" rel="noreferrer">localhost:5173</a> for a live walkthrough.</li>
+            <li>Or open the demo UI at <a href="https://voxwit.com" target="_blank" rel="noreferrer">voxwit.com</a> for a live walkthrough.</li>
           </ol>
           <p>Example request:</p>
           <pre>{ "post_text": "Product teams should talk to customers earlier." }</pre>

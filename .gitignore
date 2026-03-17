@@ -5,3 +5,4 @@ node_modules
 dist
 humor-engine-ui/node_modules
 humor-engine-ui/dist
+data/
