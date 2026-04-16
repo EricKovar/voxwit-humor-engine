@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: VoxWit Humor Engine API
+  version: 1.0.0
+  description: API for generating LinkedIn humor hooks
+paths:
+  /generate-hooks:
+    post:
+      summary: Generate humor hooks for a LinkedIn post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                post_text:
+                  type: string
+                industry:
+                  type: string
+                tone:
+                  type: string
+                max_hooks:
+                  type: integer
+      responses:
+        "200":
+          description: Hook results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hooks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        structure:
+                          type: string
+                        text:
+                          type: string
+                        score:
+                          type: number
