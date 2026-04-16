@@ -1,43 +1,72 @@
 {
- "version": "1.1",
- "structures": [
-   {
-     "name": "Truth Bomb",
-     "prompt": "Everyone says X. But the real problem is Y."
-   },
-   {
-     "name": "Corporate Translation",
-     "prompt": "Corporate translation: X = Y"
-   },
-   {
-     "name": "Unexpected Analogy",
-     "prompt": "X is basically like Y."
-   },
-   {
-     "name": "Reverse Forecast",
-     "prompt": "If you want X, stop doing Y."
-   },
-   {
-     "name": "Customer Reality Check",
-     "prompt": "Customers asked for X. What they really need is Y."
-   },
-   {
-     "name": "LinkedIn Confessional",
-     "prompt": "I used to think X. Turns out Y."
-   },
-   {
-     "name": "Data Whisper",
-     "prompt": "Metric says X. Translation: Y."
-   }
- ],
- "rules": [
-   "1-2 sentences",
-   "professional tone",
-   "clever not goofy",
-   "avoid sarcasm",
-   "no politics",
-   "show the contrast between myth vs. reality",
-   "name a concrete actor (team, metric, customer)",
-   "hint at the stakes or payoff"
- ]
+  "version": "2.0",
+  "rules": [
+    "Keep hooks to 1–2 sentences max.",
+    "Prioritize clarity and punch over cleverness.",
+    "Use contrast (expectation vs reality) whenever possible.",
+    "Avoid fluff, filler, and generic phrasing.",
+    "Sound intelligent, not goofy.",
+    "Avoid sarcasm that feels negative or cynical.",
+    "Anchor statements in real actors (teams, users, metrics, founders).",
+    "Imply stakes, tension, or consequence.",
+    "Make the reader feel seen, surprised, or slightly uncomfortable (in a good way).",
+    "Write for scroll-stopping first lines."
+  ],
+
+  "structures": [
+
+    { "name": "Truth Bomb", "pattern": "Everyone says X. But the real problem is Y." },
+    { "name": "Expectation Flip", "pattern": "You think X matters. It doesn’t. Y does." },
+    { "name": "Myth vs Reality", "pattern": "The myth: X. The reality: Y." },
+
+    { "name": "Corporate Translation", "pattern": "Corporate translation: X actually means Y." },
+    { "name": "Executive Parody", "pattern": "Leadership says X. The team hears Y." },
+
+    { "name": "Unexpected Analogy", "pattern": "X is basically like Y." },
+    { "name": "Absurd Analogy", "pattern": "X is like Y, but worse." },
+    { "name": "Domain Swap", "pattern": "Running X is like trying to Y in a completely different world." },
+
+    { "name": "Reverse Forecast", "pattern": "If you keep doing X, expect Y." },
+    { "name": "Anti-Advice", "pattern": "If you want X, stop doing Y." },
+
+    { "name": "Brutal Honesty", "pattern": "No one says this, but X is actually Y." },
+    { "name": "Confessional", "pattern": "I used to believe X. I was wrong." },
+
+    { "name": "Customer Reality Check", "pattern": "Customers don’t care about X. They care about Y." },
+
+    { "name": "Data Whisper", "pattern": "The numbers look like X, but they’re actually telling you Y." },
+
+    { "name": "Pain Amplifier", "pattern": "The hardest part about X isn’t Y. It’s Z." },
+
+    { "name": "False Cause", "pattern": "People think X causes Y. It’s actually Z." },
+
+    { "name": "Hidden Tradeoff", "pattern": "Every time you optimize for X, you’re sacrificing Y." },
+
+    { "name": "Pattern Interrupt Question", "pattern": "What if X isn’t the problem?" },
+
+    { "name": "Specificity Escalation", "pattern": "Not just X—specifically Y." },
+
+    { "name": "Time Collapse", "pattern": "You don’t lose X overnight. You lose it slowly by doing Y." },
+
+    { "name": "Insider Language Parody", "pattern": "We call it X. It’s really just Y." },
+
+    { "name": "Authority Inversion", "pattern": "The people closest to X know Y is the real issue." },
+
+    { "name": "Unexpected Consequence", "pattern": "The moment you fix X is when Y starts breaking." },
+
+    { "name": "Comparison Compression", "pattern": "X vs Y isn’t even close." },
+
+    { "name": "Blunt Contrast", "pattern": "X sounds good. Y actually works." },
+
+    { "name": "Signal vs Noise", "pattern": "Everyone is focused on X. The real signal is Y." }
+  ],
+
+  "tones": {
+    "witty": "Sharp, clever, slightly playful, but controlled.",
+    "dry": "Minimalist, understated, almost deadpan.",
+    "playful": "Light, engaging, slightly exaggerated but not silly.",
+    "corporate_satire": "Professional tone with subtle irony about business language.",
+    "chaos": "Unexpected, slightly absurd, high contrast, surprising phrasing.",
+    "earnest": "Sincere, insightful, thoughtful, grounded in truth."
+  }
 }
