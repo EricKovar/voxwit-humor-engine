@@ -1,72 +1,539 @@
 {
-  "version": "2.0",
-  "rules": [
-    "Keep hooks to 1–2 sentences max.",
+  "version": "3.0",
+  "description": "Humor Engine Prompt Library for generating high-contrast, insight-driven hooks for professional content. Optimized for product, startup, operator, and thought-leadership writing.",
+  "constraints": {
+    "max_sentences": 2,
+    "min_sentences": 1,
+    "max_hooks_per_batch": 5,
+    "prefer_scroll_stopping_open": true,
+    "require_clear_point_of_view": true,
+    "require_concrete_actor_or_system": true,
+    "avoid_generic_phrasing": true,
+    "avoid_mean_spirited_tone": true,
+    "avoid_punching_down": true,
+    "prefer_contrast": true,
+    "prefer_stakes": true
+  },
+  "style_rules": [
     "Prioritize clarity and punch over cleverness.",
-    "Use contrast (expectation vs reality) whenever possible.",
-    "Avoid fluff, filler, and generic phrasing.",
     "Sound intelligent, not goofy.",
-    "Avoid sarcasm that feels negative or cynical.",
-    "Anchor statements in real actors (teams, users, metrics, founders).",
+    "Keep the language tight, clean, and readable.",
+    "Avoid fluff, filler, and vague abstractions.",
+    "Favor concrete nouns over business buzzwords.",
+    "Use surprise carefully; do not become confusing.",
+    "Write for strong first-line impact.",
+    "Prefer sharp observations over performative edginess."
+  ],
+  "rhetorical_rules": [
+    "Use contrast whenever possible.",
+    "Anchor statements in real actors, systems, incentives, or metrics.",
     "Imply stakes, tension, or consequence.",
-    "Make the reader feel seen, surprised, or slightly uncomfortable (in a good way).",
-    "Write for scroll-stopping first lines."
+    "Make the reader feel seen, surprised, or challenged in a productive way.",
+    "Add a new framing, not just a rewording.",
+    "Prefer compressed insight over explanation.",
+    "When relevant, expose tradeoffs, incentives, bottlenecks, or second-order effects."
   ],
-
+  "safety_rules": [
+    "Do not demean protected classes or vulnerable groups.",
+    "Do not use cruelty as humor.",
+    "Do not rely on insults, mockery, or dehumanizing language.",
+    "Avoid cynicism that feels bitter, defeatist, or contemptuous.",
+    "Do not make unsupported factual claims.",
+    "Do not target individuals in a personally attacking way."
+  ],
+  "anti_patterns": [
+    "Hooks that could apply to almost any topic.",
+    "Hooks that restate the source text without adding insight.",
+    "Hooks built on vague words like innovation, success, strategy, or growth without specifics.",
+    "Hooks that sound smug, cynical, or performatively brutal.",
+    "Hooks that use analogy without improving understanding.",
+    "Hooks that introduce contrast, but the contrast is weak or obvious.",
+    "Hooks with no visible actor, system, user, metric, or consequence.",
+    "Hooks that sound like generic LinkedIn guru content.",
+    "Hooks that are too abstract to visualize.",
+    "Hooks that confuse cleverness with clarity."
+  ],
+  "input_schema": {
+    "required_fields": ["source_text"],
+    "optional_fields": [
+      "industry",
+      "audience",
+      "tone",
+      "actor",
+      "customer",
+      "user",
+      "team",
+      "metric",
+      "belief",
+      "problem",
+      "real_problem",
+      "tradeoff",
+      "stake",
+      "consequence",
+      "incentive_conflict",
+      "system_constraint",
+      "time_horizon",
+      "author_voice"
+    ]
+  },
+  "selection_logic": {
+    "if_metric_present": [
+      "Data Whisper",
+      "Vanity Metric Unmasking",
+      "Signal vs Noise"
+    ],
+    "if_customer_or_user_present": [
+      "Customer Reality Check",
+      "Stakeholder Split",
+      "Authority Inversion"
+    ],
+    "if_incentive_conflict_present": [
+      "Incentive Reveal",
+      "Hidden Tradeoff",
+      "Narrative Correction"
+    ],
+    "if_personal_belief_shift_present": [
+      "Confessional",
+      "Brutal Honesty"
+    ],
+    "if_system_or_ops_problem_present": [
+      "Bottleneck Reveal",
+      "Execution Tax",
+      "Operator Lens"
+    ],
+    "if_consequence_present": [
+      "Reverse Forecast",
+      "Unexpected Consequence",
+      "Second-Order Effect",
+      "Time Collapse"
+    ],
+    "if_input_is_abstract": [
+      "Specificity Escalation",
+      "Pattern Interrupt Question",
+      "Narrative Correction"
+    ],
+    "if_need_subtle_humor": [
+      "Corporate Translation",
+      "Leadership Translation",
+      "Insider Language Parody"
+    ],
+    "if_need_sharper_contrast": [
+      "Truth Bomb",
+      "Myth vs Reality",
+      "Blunt Contrast",
+      "Signal vs Noise"
+    ]
+  },
+  "scoring": {
+    "clarity": 0.2,
+    "specificity": 0.15,
+    "tension": 0.15,
+    "novelty": 0.15,
+    "actor_grounding": 0.1,
+    "stakes_or_consequence": 0.05,
+    "scroll_stop_strength": 0.1,
+    "tone_match": 0.1
+  },
+  "rewrite_pass": [
+    "Shorten weak openings.",
+    "Replace abstractions with concrete actors or systems.",
+    "Increase contrast if the hook feels flat.",
+    "Remove filler words and hedging.",
+    "Tighten the second sentence so it lands harder than the first.",
+    "Check that the hook adds insight, not just attitude."
+  ],
   "structures": [
-
-    { "name": "Truth Bomb", "pattern": "Everyone says X. But the real problem is Y." },
-    { "name": "Expectation Flip", "pattern": "You think X matters. It doesn’t. Y does." },
-    { "name": "Myth vs Reality", "pattern": "The myth: X. The reality: Y." },
-
-    { "name": "Corporate Translation", "pattern": "Corporate translation: X actually means Y." },
-    { "name": "Executive Parody", "pattern": "Leadership says X. The team hears Y." },
-
-    { "name": "Unexpected Analogy", "pattern": "X is basically like Y." },
-    { "name": "Absurd Analogy", "pattern": "X is like Y, but worse." },
-    { "name": "Domain Swap", "pattern": "Running X is like trying to Y in a completely different world." },
-
-    { "name": "Reverse Forecast", "pattern": "If you keep doing X, expect Y." },
-    { "name": "Anti-Advice", "pattern": "If you want X, stop doing Y." },
-
-    { "name": "Brutal Honesty", "pattern": "No one says this, but X is actually Y." },
-    { "name": "Confessional", "pattern": "I used to believe X. I was wrong." },
-
-    { "name": "Customer Reality Check", "pattern": "Customers don’t care about X. They care about Y." },
-
-    { "name": "Data Whisper", "pattern": "The numbers look like X, but they’re actually telling you Y." },
-
-    { "name": "Pain Amplifier", "pattern": "The hardest part about X isn’t Y. It’s Z." },
-
-    { "name": "False Cause", "pattern": "People think X causes Y. It’s actually Z." },
-
-    { "name": "Hidden Tradeoff", "pattern": "Every time you optimize for X, you’re sacrificing Y." },
-
-    { "name": "Pattern Interrupt Question", "pattern": "What if X isn’t the problem?" },
-
-    { "name": "Specificity Escalation", "pattern": "Not just X—specifically Y." },
-
-    { "name": "Time Collapse", "pattern": "You don’t lose X overnight. You lose it slowly by doing Y." },
-
-    { "name": "Insider Language Parody", "pattern": "We call it X. It’s really just Y." },
-
-    { "name": "Authority Inversion", "pattern": "The people closest to X know Y is the real issue." },
-
-    { "name": "Unexpected Consequence", "pattern": "The moment you fix X is when Y starts breaking." },
-
-    { "name": "Comparison Compression", "pattern": "X vs Y isn’t even close." },
-
-    { "name": "Blunt Contrast", "pattern": "X sounds good. Y actually works." },
-
-    { "name": "Signal vs Noise", "pattern": "Everyone is focused on X. The real signal is Y." }
+    {
+      "name": "Truth Bomb",
+      "pattern": "Everyone says X. But the real problem is Y.",
+      "purpose": "Expose false consensus and replace it with a sharper diagnosis.",
+      "requires": ["common_belief", "real_problem"],
+      "best_for": ["thought_leadership", "operator_posts", "product_strategy"],
+      "avoid_when": ["input lacks a clear false belief", "topic is too nuanced for a clean contrast"],
+      "risk_level": "medium",
+      "rewrite_bias": ["clearer", "more_direct", "more_concrete"]
+    },
+    {
+      "name": "Expectation Flip",
+      "pattern": "You think X matters. It doesn’t. Y does.",
+      "purpose": "Break default assumptions quickly.",
+      "requires": ["assumed_priority", "actual_priority"],
+      "best_for": ["advice", "product", "leadership", "growth"],
+      "avoid_when": ["the contrast is too extreme to sound credible"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_credible", "less_absolute_if_needed"]
+    },
+    {
+      "name": "Myth vs Reality",
+      "pattern": "The myth: X. The reality: Y.",
+      "purpose": "Create a compact, familiar contrast frame.",
+      "requires": ["myth", "reality"],
+      "best_for": ["thought_leadership", "industry_observation", "education"],
+      "avoid_when": ["the reality statement is not clearly stronger than the myth"],
+      "risk_level": "low",
+      "rewrite_bias": ["tighter", "sharper"]
+    },
+    {
+      "name": "Corporate Translation",
+      "pattern": "Corporate translation: X actually means Y.",
+      "purpose": "Translate polished business language into operating reality.",
+      "requires": ["business_phrase", "real_meaning"],
+      "best_for": ["corporate_satire", "leadership", "org_design", "product_ops"],
+      "avoid_when": ["the translation sounds bitter instead of insightful"],
+      "risk_level": "medium",
+      "rewrite_bias": ["subtler", "cleaner", "more_professional"]
+    },
+    {
+      "name": "Leadership Translation",
+      "pattern": "Leadership says X. The team experiences Y.",
+      "purpose": "Reveal the gap between executive framing and operational reality.",
+      "requires": ["leadership_message", "team_reality"],
+      "best_for": ["management", "org_dynamics", "execution"],
+      "avoid_when": ["it becomes personal rather than systemic"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_systemic", "less_snarky"]
+    },
+    {
+      "name": "Unexpected Analogy",
+      "pattern": "X is basically like Y.",
+      "purpose": "Make the point memorable through compression and association.",
+      "requires": ["subject", "analogy"],
+      "best_for": ["creative_thought_leadership", "explainers", "social_posts"],
+      "avoid_when": ["the analogy does not increase understanding"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_relevant", "more_visual"]
+    },
+    {
+      "name": "Sharp Analogy",
+      "pattern": "X is like Y: it looks fine until the real pressure hits.",
+      "purpose": "Use analogy to expose fragility, stress, or hidden weakness.",
+      "requires": ["subject", "analogy", "pressure_point"],
+      "best_for": ["ops", "product", "scale", "execution"],
+      "avoid_when": ["there is no genuine stress condition in the source idea"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_concrete", "less_forced"]
+    },
+    {
+      "name": "Cross-Domain Analogy",
+      "pattern": "Running X without Y is like trying to Z in a system built for the opposite.",
+      "purpose": "Highlight mismatch between goal and system design.",
+      "requires": ["subject", "missing_capability", "cross_domain_example"],
+      "best_for": ["systems_thinking", "ops", "product_strategy"],
+      "avoid_when": ["the analogy becomes too elaborate"],
+      "risk_level": "medium",
+      "rewrite_bias": ["simpler", "tighter"]
+    },
+    {
+      "name": "Reverse Forecast",
+      "pattern": "If you keep doing X, expect Y.",
+      "purpose": "Frame consequences clearly and fast.",
+      "requires": ["current_behavior", "likely_consequence"],
+      "best_for": ["advice", "leadership", "product", "growth"],
+      "avoid_when": ["the consequence is too speculative"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "higher_stakes"]
+    },
+    {
+      "name": "Anti-Advice",
+      "pattern": "If you want X, stop doing Y.",
+      "purpose": "Create a direct, memorable corrective.",
+      "requires": ["desired_outcome", "counterproductive_behavior"],
+      "best_for": ["operator_content", "career_advice", "product", "founder_posts"],
+      "avoid_when": ["the stop-doing claim lacks evidence or logic"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_practical", "less_preachy"]
+    },
+    {
+      "name": "Brutal Honesty",
+      "pattern": "No one says this, but X is actually Y.",
+      "purpose": "Signal candor and reveal a less comfortable truth.",
+      "requires": ["unsaid_truth", "real_reframe"],
+      "best_for": ["thought_leadership", "founder_content", "ops_observations"],
+      "avoid_when": ["the claim sounds edgy for its own sake"],
+      "risk_level": "high",
+      "rewrite_bias": ["more_credible", "less_theatrical"]
+    },
+    {
+      "name": "Confessional",
+      "pattern": "I used to believe X. I was wrong.",
+      "purpose": "Use self-correction to build trust and insight.",
+      "requires": ["past_belief", "shifted_view"],
+      "best_for": ["personal_brand", "founder_posts", "leadership_lessons"],
+      "avoid_when": ["the source has no authentic first-person angle"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_humble"]
+    },
+    {
+      "name": "Customer Reality Check",
+      "pattern": "Customers don’t care about X. They care about Y.",
+      "purpose": "Recenter the message on actual user value.",
+      "requires": ["internal_focus", "customer_priority"],
+      "best_for": ["product", "marketing", "go_to_market", "customer_experience"],
+      "avoid_when": ["customer need is assumed but not grounded"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_customer_specific", "less_absolute_if_needed"]
+    },
+    {
+      "name": "Data Whisper",
+      "pattern": "The numbers look like X, but they’re actually telling you Y.",
+      "purpose": "Translate surface metrics into deeper meaning.",
+      "requires": ["metric_signal", "deeper_interpretation"],
+      "best_for": ["analytics", "growth", "product", "ops"],
+      "avoid_when": ["there is no real metric or observed signal"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_metric_grounded"]
+    },
+    {
+      "name": "Pain Amplifier",
+      "pattern": "The hardest part about X isn’t Y. It’s Z.",
+      "purpose": "Expose the deeper pain point beneath the obvious one.",
+      "requires": ["topic", "obvious_pain", "deeper_pain"],
+      "best_for": ["ops", "customer_experience", "leadership", "product"],
+      "avoid_when": ["the deeper pain is weaker than the obvious pain"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_human"]
+    },
+    {
+      "name": "False Cause",
+      "pattern": "People think X causes Y. It’s actually Z.",
+      "purpose": "Correct flawed causal thinking.",
+      "requires": ["false_cause", "assumed_effect", "real_cause"],
+      "best_for": ["thought_leadership", "analysis", "strategy", "product"],
+      "avoid_when": ["causality is uncertain or too contested"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_evidence_aligned", "less_absolute"]
+    },
+    {
+      "name": "Hidden Tradeoff",
+      "pattern": "Every time you optimize for X, you’re sacrificing Y.",
+      "purpose": "Reveal the cost hidden behind a decision or metric.",
+      "requires": ["optimization_target", "sacrificed_value"],
+      "best_for": ["strategy", "product", "leadership", "operations"],
+      "avoid_when": ["no real tradeoff exists"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_concrete", "more_stakes"]
+    },
+    {
+      "name": "Pattern Interrupt Question",
+      "pattern": "What if X isn’t the problem?",
+      "purpose": "Open curiosity and challenge default diagnosis.",
+      "requires": ["assumed_problem"],
+      "best_for": ["hooks", "threads", "thought_leadership"],
+      "avoid_when": ["there is no stronger alternative frame behind it"],
+      "risk_level": "low",
+      "rewrite_bias": ["pair_with_follow_up_if_needed"]
+    },
+    {
+      "name": "Specificity Escalation",
+      "pattern": "It’s not just X. It’s specifically Y that breaks trust, speed, or results.",
+      "purpose": "Move from vague problem framing to a more precise diagnosis.",
+      "requires": ["broad_issue", "specific_issue"],
+      "best_for": ["analysis", "product", "ops", "critique"],
+      "avoid_when": ["the specific issue is not materially stronger"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_precise", "more_operational"]
+    },
+    {
+      "name": "Time Collapse",
+      "pattern": "You don’t lose X overnight. You lose it slowly by doing Y.",
+      "purpose": "Show gradual erosion instead of dramatic failure.",
+      "requires": ["valuable_asset", "repeated_behavior"],
+      "best_for": ["leadership", "culture", "product_quality", "trust"],
+      "avoid_when": ["the source does not support cumulative decline"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_emotional"]
+    },
+    {
+      "name": "Insider Language Parody",
+      "pattern": "We call it X. It’s really just Y.",
+      "purpose": "Strip jargon down to its operating reality.",
+      "requires": ["internal_label", "plain_english_translation"],
+      "best_for": ["corporate_satire", "org_design", "product_ops"],
+      "avoid_when": ["the translation feels mocking rather than useful"],
+      "risk_level": "medium",
+      "rewrite_bias": ["cleaner", "less_cynical"]
+    },
+    {
+      "name": "Authority Inversion",
+      "pattern": "The people closest to X know Y is the real issue.",
+      "purpose": "Shift credibility toward operators, users, or frontline reality.",
+      "requires": ["system_or_problem", "frontline_truth"],
+      "best_for": ["leadership", "customer_experience", "operations"],
+      "avoid_when": ["the authority shift is vague or unsupported"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_grounded", "more_specific_actor"]
+    },
+    {
+      "name": "Unexpected Consequence",
+      "pattern": "The moment you fix X is when Y starts breaking.",
+      "purpose": "Highlight nonlinear or downstream effects.",
+      "requires": ["fix_or_win", "new_failure_mode"],
+      "best_for": ["systems", "product", "growth", "ops"],
+      "avoid_when": ["the second-order effect is weak or implausible"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_causal", "more_specific"]
+    },
+    {
+      "name": "False Equivalence Breaker",
+      "pattern": "X and Y get grouped together. They’re solving completely different problems.",
+      "purpose": "Separate concepts that are often lazily treated as the same.",
+      "requires": ["concept_a", "concept_b", "difference"],
+      "best_for": ["thought_leadership", "education", "strategy"],
+      "avoid_when": ["the difference is trivial"],
+      "risk_level": "low",
+      "rewrite_bias": ["clearer", "more_distinct"]
+    },
+    {
+      "name": "Blunt Contrast",
+      "pattern": "X sounds good. Y actually works.",
+      "purpose": "Create compressed contrast between appearance and effectiveness.",
+      "requires": ["attractive_idea", "effective_alternative"],
+      "best_for": ["advice", "product", "leadership", "operator_posts"],
+      "avoid_when": ["Y is not clearly more effective"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "less_generic"]
+    },
+    {
+      "name": "Signal vs Noise",
+      "pattern": "Everyone is focused on X. The real signal is Y.",
+      "purpose": "Redirect attention to the more meaningful variable.",
+      "requires": ["popular_focus", "real_signal"],
+      "best_for": ["analytics", "strategy", "thought_leadership", "product"],
+      "avoid_when": ["the supposed signal is not actually stronger"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_metric_or_actor_grounded"]
+    },
+    {
+      "name": "Incentive Reveal",
+      "pattern": "The issue isn’t X. It’s that the incentives reward Y.",
+      "purpose": "Explain dysfunction through incentives rather than surface symptoms.",
+      "requires": ["surface_problem", "incentive_conflict"],
+      "best_for": ["org_design", "leadership", "market_dynamics", "product_strategy"],
+      "avoid_when": ["no genuine incentive structure is present"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_systemic", "more_credible"]
+    },
+    {
+      "name": "Second-Order Effect",
+      "pattern": "X looks like the win. Y is the consequence no one priced in.",
+      "purpose": "Expose downstream costs of an attractive decision.",
+      "requires": ["apparent_win", "hidden_consequence"],
+      "best_for": ["strategy", "product", "growth", "operations"],
+      "avoid_when": ["the second-order effect is speculative"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_specific", "less_dramatic"]
+    },
+    {
+      "name": "Operator Lens",
+      "pattern": "From the outside, X looks smart. Inside the system, it creates Y.",
+      "purpose": "Contrast external perception with operational reality.",
+      "requires": ["surface_impression", "internal_effect"],
+      "best_for": ["ops", "leadership", "platforms", "product"],
+      "avoid_when": ["there is no meaningful inside/outside contrast"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_operational", "more_visual"]
+    },
+    {
+      "name": "PMF Lens",
+      "pattern": "People call X growth. A lot of the time it’s just unresolved demand leaking through.",
+      "purpose": "Challenge shallow growth narratives with a product-market-fit lens.",
+      "requires": ["surface_growth_signal", "deeper_product_explanation"],
+      "best_for": ["startups", "growth", "product_strategy", "founder_content"],
+      "avoid_when": ["the source topic is far from product or market behavior"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_relevant_to_context", "less_jargony_if_needed"]
+    },
+    {
+      "name": "Execution Tax",
+      "pattern": "X sounds strategic until the team has to operationalize it.",
+      "purpose": "Expose the implementation burden hidden behind high-level ideas.",
+      "requires": ["strategic_idea", "execution_burden"],
+      "best_for": ["ops", "leadership", "product", "transformation"],
+      "avoid_when": ["there is no practical implementation layer"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_concrete", "more_team_grounded"]
+    },
+    {
+      "name": "Stakeholder Split",
+      "pattern": "X works for leadership. Y is what the customer actually feels.",
+      "purpose": "Highlight different realities across stakeholders.",
+      "requires": ["leadership_or_internal_benefit", "customer_or_user_impact"],
+      "best_for": ["customer_experience", "product", "org_design", "strategy"],
+      "avoid_when": ["stakeholder difference is not clear"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_balanced", "more_specific"]
+    },
+    {
+      "name": "Vanity Metric Unmasking",
+      "pattern": "X looks impressive on a dashboard. It says almost nothing about Y.",
+      "purpose": "Challenge metrics that create false confidence.",
+      "requires": ["vanity_metric", "missing_real_outcome"],
+      "best_for": ["analytics", "growth", "product", "leadership"],
+      "avoid_when": ["the metric is actually a valid leading indicator"],
+      "risk_level": "medium",
+      "rewrite_bias": ["more_data_literate", "more_precise"]
+    },
+    {
+      "name": "Bottleneck Reveal",
+      "pattern": "The constraint isn’t X. It’s the fact that Y still has to happen by hand.",
+      "purpose": "Expose hidden manual work or process friction as the real constraint.",
+      "requires": ["assumed_constraint", "manual_or_hidden_constraint"],
+      "best_for": ["operations", "automation", "productivity", "systems"],
+      "avoid_when": ["no real bottleneck or manual dependency exists"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_systemic"]
+    },
+    {
+      "name": "Narrative Correction",
+      "pattern": "The story people tell is X. The operating reality is Y.",
+      "purpose": "Replace a clean story with a truer systems-level explanation.",
+      "requires": ["popular_story", "operating_reality"],
+      "best_for": ["strategy", "leadership", "operations", "thought_leadership"],
+      "avoid_when": ["the operating reality is not clearly differentiated"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_specific", "more_grounded"]
+    },
+    {
+      "name": "Momentum Trap",
+      "pattern": "Teams keep doing X because it feels like progress. It usually delays Y.",
+      "purpose": "Call out activity that masquerades as progress.",
+      "requires": ["activity", "delayed_outcome"],
+      "best_for": ["productivity", "ops", "leadership", "product"],
+      "avoid_when": ["the activity genuinely is progress"],
+      "risk_level": "low",
+      "rewrite_bias": ["more_concrete", "more_behavioral"]
+    }
   ],
-
   "tones": {
-    "witty": "Sharp, clever, slightly playful, but controlled.",
-    "dry": "Minimalist, understated, almost deadpan.",
-    "playful": "Light, engaging, slightly exaggerated but not silly.",
-    "corporate_satire": "Professional tone with subtle irony about business language.",
-    "chaos": "Unexpected, slightly absurd, high contrast, surprising phrasing.",
-    "earnest": "Sincere, insightful, thoughtful, grounded in truth."
+    "witty": {
+      "description": "Sharp, clever, slightly playful, but controlled.",
+      "preferred_traits": ["contrast", "compression", "surprise"],
+      "avoid": ["goofiness", "dad_jokes", "excessive irony", "smugness"]
+    },
+    "dry": {
+      "description": "Minimalist, understated, almost deadpan.",
+      "preferred_traits": ["brevity", "precision", "understatement"],
+      "avoid": ["overwriting", "exclamation", "performative cleverness"]
+    },
+    "playful": {
+      "description": "Light, engaging, slightly exaggerated but not silly.",
+      "preferred_traits": ["energy", "readability", "gentle surprise"],
+      "avoid": ["cartoonish language", "nonsense", "forced absurdity"]
+    },
+    "corporate_satire": {
+      "description": "Professional tone with subtle irony about business language.",
+      "preferred_traits": ["translation", "incentive_reveal", "jargon_decoding"],
+      "avoid": ["mean parody", "bitterness", "cheap executive caricature"]
+    },
+    "chaos": {
+      "description": "Unexpected, high-contrast, slightly absurd, but still intelligible.",
+      "preferred_traits": ["surprise", "pattern_break", "compressed weirdness"],
+      "avoid": ["randomness", "loss of clarity", "nonsensical analogies"]
+    },
+    "earnest": {
+      "description": "Sincere, insightful, thoughtful, grounded in truth.",
+      "preferred_traits": ["clarity", "truth", "specificity", "credibility"],
+      "avoid": ["snark", "performative provocation", "theatrical harshness"]
+    }
   }
 }
